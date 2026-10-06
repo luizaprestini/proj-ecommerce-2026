@@ -1,0 +1,40 @@
+<%- include('partials/header') %>
+
+<main class="container py-5 m-auto d-flex flex-column align-items-center justify-content-center flex-grow-1">
+    <div class="bg-white p-5 rounded shadow-lg w-100" style="max-width: 560px;">
+        <h4 class="display-6 text-center">Criar conta</h4>
+        <p class="text-center text-muted">Crie sua conta para cadastrar e gerenciar seus restaurantes e pratos.</p>
+        <hr>
+
+        <% if (erro) { %>
+            <div class="alert alert-danger" role="alert"><%= erro %></div>
+        <% } %>
+
+        <form action="/admin/cadastro" method="POST" autocomplete="off">
+            <div class="mb-3">
+                <label for="nome" class="form-label">Seu nome</label>
+                <input type="text" class="form-control" id="nome" name="nome" value="<%= nome %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" class="form-control" id="email" name="email" value="<%= email %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" name="senha" required>
+            </div>
+            <div class="mb-3">
+                <label for="confirmar_senha" class="form-label">Confirme a senha</label>
+                <input type="password" class="form-control" id="confirmar_senha" name="confirmar_senha" required>
+            </div>
+            <button type="submit" class="btn btn-secondary w-100">Criar conta</button>
+        </form>
+
+        <p class="text-center mt-3 mb-0">
+            Já tem uma conta?
+            <a href="/admin/login">Entrar</a>
+        </p>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

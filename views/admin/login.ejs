@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+
+    <main class="container py-5 m-auto d-flex flex-column align-items-center justify-content-center flex-grow-1">
+
+        <div class="bg-white p-5 rounded shadow-lg w-50">
+
+            <h4 class="display-6" style="text-align: center;">
+                <i class="bi bi-shop"></i>
+                Entrar
+            </h4>
+
+            <hr>
+
+            <% if (erro) { %>
+                <div class="alert alert-danger" role="alert"><%= erro %></div>
+            <% } %>
+
+            <form action="/admin/login" method="POST" autocomplete="off">
+                <div class="row">
+
+                    <div class="col-md-12">
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<%= email %>" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="senha" class="form-label">Senha</label>
+                            <input type="password" class="form-control" id="senha" name="senha" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-secondary mt-3 w-100">Entrar</button>
+
+                        <p class="text-center mt-3 mb-0">
+                            Ainda não tem conta?
+                            <a href="/admin/cadastro">Crie a sua</a>
+                        </p>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <%- include('partials/footer') %>

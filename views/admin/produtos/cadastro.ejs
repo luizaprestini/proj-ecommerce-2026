@@ -1,0 +1,92 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+<main class="container py-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">
+                <i class="bi bi-box-seam"></i>
+                <%= produto ? 'Editar Produto' : 'Cadastro de Produto' %>
+            </h4>
+        </div>
+        <div class="card-body">
+            <form action="<%= produto ? `/admin/produtos/${produto.id}/editar` : '/admin/produtos/cadastrar' %>" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="nome" class="form-label">Nome do prato</label>
+                        <input type="text" id="nome" name="nome" class="form-control" value="<%= produto ? produto.nome : '' %>" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label class="form-label">Restaurante</label>
+                        <select name="restaurante_id" class="form-select" required <%= restaurantes.length === 0 ? 'disabled' : '' %>>
+                            <option value="">
+                                Selecione um restaurante
+                            </option>
+                            <% for (let i = 0; i < restaurantes.length; i++) { %>
+                                <option value="<%= restaurantes[i].id %>" <%= produto && Number(produto.restaurante_id) === Number(restaurantes[i].id) ? 'selected' : '' %>>
+                                    <%= restaurantes[i].nome %>
+                                </option>
+                            <% } %>
+                        </select>
+                        <% if (restaurantes.length === 0) { %>
+                            <div class="form-text">
+                                Cadastre um restaurante antes de adicionar produtos.
+                                <a href="/admin/restaurantes/form-cadastrar">Cadastrar restaurante</a>
+                            </div>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="categoria" class="form-label">Categoria do prato</label>
+                        <select id="categoria" name="categoria" class="form-select" required>
+                            <option value="">Selecione uma categoria</option>
+                            <% for (const categoria of ['Marmita', 'Bowl', 'Salada', 'Lanche', 'Sobremesa fit']) { %>
+                                <option value="<%= categoria %>" <%= produto && produto.categoria === categoria ? 'selected' : '' %>><%= categoria %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="valor" class="form-label">Preço</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" id="valor" name="valor" class="form-control" min="0" step="0.01" value="<%= produto ? produto.valor : '' %>" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="imagem" class="form-label">Foto do prato</label>
+                        <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*" <%= produto ? '' : 'required' %>>
+                        <% if (produto && produto.imagem) { %>
+                            <div class="form-text">Foto atual:</div>
+                            <img src="/uploads/<%= produto.imagem %>" alt="Foto atual de <%= produto.nome %>" class="img-thumbnail mt-2" style="max-width: 120px;">
+                        <% } %>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea id="descricao" name="descricao" class="form-control" rows="3"><%= produto ? produto.descricao : '' %></textarea>
+                </div>
+
+                <fieldset class="border rounded p-3 mb-3">
+                    <legend class="float-none w-auto px-2 fs-6 fw-semibold">Informações nutricionais por porção</legend>
+                    <div class="row">
+                        <div class="col-md-3 mb-3">
+                            <label for="calorias" class="form-label">Calorias (kcal)</label>
+                            <input type="number" id="calorias" name="calorias" class="form-control" min="0" step="0.1" value="<%= produto && produto.calorias != null ? produto.calorias : '' %>" required>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="btn btn-primary" <%= restaurantes.length === 0 ? 'disabled' : '' %>>
+                    <i class="bi bi-check-circle"></i>
+                    <%= produto ? 'Salvar alterações' : 'Cadastrar' %>
+                </button>
+                <a href="/admin/produtos" class="btn btn-secondary">
+                    Cancelar
+                </a>
+            </form>
+        </div>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>

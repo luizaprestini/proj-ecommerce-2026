@@ -1,0 +1,64 @@
+<%- include('partials/header') %>
+<%- include('partials/menu') %>
+
+<main class="container py-5">
+
+    <div class="bg-white p-5 rounded shadow-sm">
+
+        <h1 class="display-6">
+            <i class="bi bi-shop"></i>
+            WebFit
+        </h1>
+        <p class="text-muted">Olá, <%= userName %>. Este painel mostra apenas os restaurantes e pratos da sua conta.</p>
+        <h3>
+            Comer bem nunca foi tão fácil. 
+        </h3> 
+
+        <p class="lead">
+            Painel administrativo para gerenciar os restaurantes fit e seus cardápios.
+        </p>
+
+        <hr>
+
+        <div class="row">
+
+            <div class="col-md-6 mb-3">
+                <div class="card text-bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-box-seam"></i>
+                            Cardápio
+                        </h5>
+                        <p class="card-text">
+                            Cadastre e consulte os pratos, marmitas e bebidas fit de cada restaurante.
+                        </p>
+                        <a href="/admin/produtos" class="btn btn-light">
+                            Ver cardápio
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card text-bg-warning">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-geo-alt"></i>
+                            Restaurantes
+                        </h5>
+                        <p class="card-text">
+                           Cadastre e gerencie os restaurantes fit parceiros do site.
+                        </p>
+                        <a href="/admin/restaurantes" class="btn btn-light">
+                            Ver restaurantes
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,66 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+
+        <a class="navbar-brand" href="/admin/index">
+            <i class="bi bi-shop"></i>
+            WebFit
+        </a>
+
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#menuPrincipal">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menuPrincipal">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/index">
+                        <i class="bi bi-house"></i>
+                        Início
+                    </a>
+                </li>
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle"
+                        href="#"
+                        role="button"
+                        data-bs-toggle="dropdown">
+                        <i class="bi bi-box-seam"></i>
+                        Cardápio
+                    </a>
+
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a class="dropdown-item" href="/admin/produtos/form-cadastrar">
+                                <i class="bi bi-plus-circle"></i>
+                                Cadastrar prato
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="/admin/produtos">
+                                <i class="bi bi-list"></i>
+                                Listar pratos
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/restaurantes">
+                        <i class="bi bi-building"></i>
+                        Restaurantes
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <form action="/admin/logout" method="POST" class="d-inline">
+                        <button type="submit" class="nav-link btn btn-link">
+                            <i class="bi bi-box-arrow-right"></i>
+                            Sair (<%= userName %>)
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
