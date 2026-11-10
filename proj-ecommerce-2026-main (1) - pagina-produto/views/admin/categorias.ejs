@@ -1,0 +1,53 @@
+<%- include('partials/header') %>
+<%- include('partials/menu') %>
+
+<main class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 mb-0">
+            <i class="bi bi-tags"></i>
+            Pratos por categoria
+        </h1>
+        <a href="/admin/produtos/form-cadastrar" class="btn btn-primary" style="background-color: #244e38; border-color: #244e38;">
+            <i class="bi bi-plus-circle"></i>
+            Cadastrar prato
+        </a>
+    </div>
+
+    <% if (categorias.length === 0) { %>
+        <div class="alert alert-info">Ainda não há pratos cadastrados por categoria.</div>
+    <% } %>
+
+    <% categorias.forEach(categoria => { %>
+        <section class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h2 class="h5 mb-0"><%= categoria.nome %></h2>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Prato</th>
+                                <th>Descrição</th>
+                                <th>Preço</th>
+                                <th>Calorias</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% categoria.pratos.forEach(prato => { %>
+                                <tr>
+                                    <td><%= prato.nome %></td>
+                                    <td><%= prato.descricao || '—' %></td>
+                                    <td>R$ <%= Number(prato.valor || 0).toFixed(2) %></td>
+                                    <td><%= prato.calorias == null ? '—' : Number(prato.calorias).toLocaleString('pt-BR') + ' kcal' %></td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    <% }) %>
+</main>
+
+<%- include('partials/footer') %>

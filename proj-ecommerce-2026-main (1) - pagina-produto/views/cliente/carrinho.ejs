@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Carrinho | WebFit</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/cliente.css">
+</head>
+<body>
+<header class="topo">
+    <a class="marca" href="/">WebFit</a>
+    <nav><a href="/pratos">Continuar comprando</a></nav>
+</header>
+
+<main class="container py-5">
+    <a class="voltar" href="/pratos">← Voltar aos pratos</a>
+    <p class="etiqueta mt-4">SELEÇÃO</p>
+    <h1>Seu carrinho</h1>
+
+    <% if (itens.length === 0) { %>
+        <div class="vazio">
+            <div class="vazio-icone">🛒</div>
+            <h2>Seu carrinho está vazio</h2>
+            <p>Explore as categorias e escolha um prato para adicionar.</p>
+            <a class="botao" href="/pratos">Ver pratos</a>
+        </div>
+    <% } else { %>
+
+        <% itens.forEach((item) => { %>
+            <% const produto = item.produto; %>
+            <div class="card mb-3">
+                <div class="row g-0 align-items-center">
+
+                    <!-- Imagem do prato -->
+                    <div class="col-3 col-sm-2">
+                        <a href="/pratos/<%= produto.id %>">
+                            <% if (produto.imagem) { %>
+                                <img src="/uploads/<%= produto.imagem %>" class="img-fluid rounded-start" alt="<%= produto.nome %>">
+                            <% } else { %>
+                                <div class="mini-imagem">🥗</div>
+                            <% } %>
+                        </a>
+                    </div>
+
+                    <div class="col-9 col-sm-10">
+                        <div class="card-body">
+                            <div class="row align-items-center g-2">
+
+                                <!-- Dados do prato -->
+                                <div class="col-12 col-md-5">
+                                    <h2 class="h6 mb-1">
+                                        <a href="/pratos/<%= produto.id %>"><%= produto.nome %></a>
+                                    </h2>
+                                    <p class="mb-0"><%= produto.categoria %></p>
+                                    <p class="small text-secondary mb-0">Unitário: R$ <%= produto.valor.toFixed(2).replace('.', ',') %></p>
+                                </div>
+
+                                <!-- Quantidade -->
+                                <div class="col-6 col-md-3">
+                                    <form method="post" action="/carrinho/diminuir/<%= produto.id %>" class="d-inline">
+                                        <button class="btn btn-outline-secondary btn-sm">-</button>
+                                    </form>
+                                    <span class="mx-2"><%= item.quantidade %></span>
+                                    <form method="post" action="/carrinho/adicionar/<%= produto.id %>" class="d-inline">
+                                        <button class="btn btn-outline-secondary btn-sm">+</button>
+                                    </form>
+                                </div>
+
+                                <!-- Subtotal e remover -->
+                                <div class="col-6 col-md-4 text-end">
+                                    <strong>R$ <%= item.subtotal.toFixed(2).replace('.', ',') %></strong>
+                                    <form method="post" action="/carrinho/remover/<%= produto.id %>" class="mt-1">
+                                        <button class="btn btn-outline-danger btn-sm">Remover</button>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <% }) %>
+
+        <!-- Total -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <h2 class="h5 mb-0">Total (<%= totalItens %> itens): R$ <%= total.toFixed(2).replace('.', ',') %></h2>
+            <form method="post" action="/carrinho/limpar">
+                <button class="btn btn-outline-danger">Esvaziar carrinho</button>
+            </form>
+        </div>
+
+    <% } %>
+</main>
+
+<footer>WebFit · Refeições saudáveis para todos os dias</footer>
+</body>
+</html>

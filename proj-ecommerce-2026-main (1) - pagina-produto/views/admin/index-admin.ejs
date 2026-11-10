@@ -1,0 +1,62 @@
+
+<%- include('partials/header') %>
+<%- include('partials/menu') %>
+
+<main class="container admin-home">
+
+    <section class="admin-dashboard">
+
+        <h1 class="admin-dashboard__title">
+            <i class="bi bi-shop" aria-hidden="true"></i>
+            Restaurante<span>Admin</span>
+        </h1>
+        <h2>Comer bem nunca foi tão fácil.</h2>
+
+        <p>
+            Painel administrativo para organizar e cadastrar os pratos do restaurante.
+        </p>
+
+        <hr>
+
+        <div class="row g-3">
+
+            <div class="col-md-6 mb-3">
+                <div class="card admin-dashboard__card admin-dashboard__card--menu">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-egg-fried" aria-hidden="true"></i>
+                            Cardápio
+                        </h5>
+                        <p class="card-text">
+                            Cadastre e consulte os pratos, marmitas e opções do cardápio.
+                        </p>
+                        <a href="/admin/produtos" class="btn btn-light admin-dashboard__button">
+                            Ver cardápio
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <div class="card admin-dashboard__card admin-dashboard__card--categories">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <i class="bi bi-tag" aria-hidden="true"></i>
+                            Categorias
+                        </h5>
+                        <p class="card-text">
+                            Veja os pratos organizados por categoria.
+                        </p>
+                        <a href="/admin/categorias" class="btn btn-light admin-dashboard__button">
+                            Ver categorias
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,69 @@
+<%- include('../partials/header') %>
+<%- include('../partials/menu') %>
+
+<main class="container py-4">
+    <div class="card admin-list-card admin-form-card shadow-sm">
+        <div class="card-header admin-list-card__header text-white">
+            <h1 class="h4 mb-0">
+                <i class="bi bi-egg-fried"></i>
+                Cadastrar prato
+            </h1>
+        </div>
+        <div class="card-body admin-form-card__body">
+            <p class="text-muted mb-4">
+                Preencha os dados abaixo para adicionar um prato ao cardápio.
+            </p>
+
+            <form action="/admin/produtos/cadastrar" method="POST" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-8 mb-3">
+                        <label for="nome" class="form-label">Nome do prato</label>
+                        <input type="text" id="nome" name="nome" class="form-control" required>
+                    </div>
+                </div>
+
+                <h2 class="admin-form-section-title">Categoria e informações do prato</h2>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="categoria" class="form-label">Categoria do prato</label>
+                        <select id="categoria" name="categoria" class="form-select" required>
+                            <option value="">Selecione uma categoria</option>
+                            <% categorias.forEach(categoria => { %>
+                                <option value="<%= categoria.nome %>"><%= categoria.nome %></option>
+                            <% } %>
+                        </select>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="valor" class="form-label">Preço de venda</label>
+                        <div class="input-group">
+                            <span class="input-group-text">R$</span>
+                            <input type="number" id="valor" name="valor" class="form-control" min="0" step="0.01" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="calorias" class="form-label">Calorias por porção (kcal)</label>
+                        <input type="number" id="calorias" name="calorias" class="form-control" min="0" step="0.1" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição do prato <span class="text-muted">(opcional)</span></label>
+                    <textarea id="descricao" name="descricao" class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="imagem" class="form-label">Foto do prato <span class="text-muted">(opcional)</span></label>
+                    <input type="file" id="imagem" name="imagem" class="form-control" accept="image/*">
+                </div>
+
+                <button type="submit" class="btn admin-form-submit">
+                    <i class="bi bi-check-circle"></i>
+                    Salvar prato
+                </button>
+                <a href="/admin/produtos" class="btn admin-form-cancel">Voltar ao cardápio</a>
+            </form>
+        </div>
+    </div>
+</main>
+
+<%- include('../partials/footer') %>
